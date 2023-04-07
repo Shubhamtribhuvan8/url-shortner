@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors=require("cors")
-const { shorten } = require("./Function/server");
+const { shorten } = require("./server");
 app.use(express.json())
 app.use(cors())
 
