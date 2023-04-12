@@ -30,7 +30,7 @@ export default function Inputs() {
     };
     try {
       console.log("inside");
-      let beta = await axios.post("https://calm-puce-toad-gear.cyclic.app", data);
+      let beta = await axios.post("http://localhost:3001", data);
       toast.success("Url Shortened Successfully!");
 
       console.log(beta.data.shortUrl);

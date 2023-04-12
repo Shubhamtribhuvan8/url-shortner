@@ -1,28 +1,28 @@
 const express = require("express");
 const app = express();
 const cors=require("cors")
-const { shorten } = require("./server");
+const { shorten } = require("./server.js");
 app.use(express.json())
 app.use(cors())
 
-function isValidUrl(url) {
-  const urlPattern = new RegExp('^(https?:\\/\\/)?'+ 
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
-    '(\\#[-a-z\\d_]*)?$','i'); 
-  return urlPattern.test(url);
-}
+// function isValidUrl(url) {
+//   const urlPattern = new RegExp('^(https?:\\/\\/)?'+ 
+//     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+//     '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+//     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+//     '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
+//     '(\\#[-a-z\\d_]*)?$','i'); 
+//   return urlPattern.test(url);
+// }
 
 app.post("/", async (req, res) => {
   try{
     const {url}=req.body;
-     console.log(url)
-     if (!isValidUrl(url)) {
-      return res.status(400).send({ error: 'Invalid URL' });
-     }
+    //  if (!isValidUrl(url)) {
+    //   return res.status(400).send({ error: 'Invalid URL' });
+    //  }
      let shortUrl = await shorten(url);
+     console.log(shortUrl)
      res.status(200).send({ shortUrl });
   }
   catch(error){
